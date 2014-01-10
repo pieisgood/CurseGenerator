@@ -1,0 +1,18 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.post("/generate", {
+			text: $("#curseInput").val()
+		},
+		function (data, status){
+			$("#outCurse").html(data);
+		});
+	});
+});
+</script>
+<h1> Curse Generator </h1>
+<div id="outCurse"><h2>This is where our new curse will be</h2></div>
+<button>Generate Curse</button><input id="curseInput" type="text" name="generator_input" value="{{{curse}}}">
+
