@@ -114,34 +114,50 @@ var getWord = {
 	}
 };
 
-module.exports.getWords = function(db, queryList, func){
+module.exports.recurseWords = function(db, wordList, outList, func){
 	"use strict";
-	var list = [];
-	console.log("inside getWordsFunction");
-	var countDown = 0;
+	var type = wordList.shift();
 
-	for(var i = 0; i < queryList.length; i++){
-		list[i] = "";
+	while(getWord[type] === undefined){
+		outList.push(type);
+		type = wordList.shift();
+		if(wordList.length === 0){
+			func(outList);
+			return;
+		}
 	}
 
-	for(var j = 0; j < queryList.length; j++){
-		console.log(queryList[j] + j);
-		if(getWord[queryList[j][0]] !== undefined){
-			getWord[queryList[j][0]](db, function (rows){
-				countDown++;
-				list[countDown - 1] = list[countDown - 1] + rows + " ";
-				if(countDown === queryList.length){
-					func(list);
-				}
-			});
+	getWord[type](db, function (rows){
+		outList.push(rows);
+		if(wordList.length === 0){
+			func(outList);
 		}
 		else{
-			list[j] = queryList[j][0];
-			countDown++;
+			getWords(db, wordList, outList, func);
+		}
+	});
+};
+
+function getWords(db, wordList, outList, func){
+	"use strict";
+	var type = wordList.shift();
+
+	while(getWord[type] === undefined){
+		outList.push(type);
+		type = wordList.shift();
+		if(wordList.length === 0){
+			func(outList);
+			return;
 		}
 	}
 
-	console.log(list);
-
-	//func(list);
+	getWord[type](db, function (rows){
+		outList.push(rows);
+		if(wordList.length === 0){
+			func(outList);
+		}
+		else{
+			getWords(db, wordList, outList, func);
+		}
+	});
 };

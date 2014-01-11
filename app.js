@@ -45,7 +45,8 @@ app.post('/generate', function (request, response){
 	console.log(request.body);
 	var newCurse = request.body;
 	var wordList = parser.parseText(newCurse.text);
-	words.getWords(connection, wordList, function (newList){
+	var sendList = [];
+	words.recurseWords(connection, wordList, sendList, function (newList){
 		console.log(newList);
 		response.send(parser.combineText(newList));
 	});
