@@ -1,0 +1,20 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.get("/login", {
+			user: $("#Username").val(),
+			password: $("#Password").val()
+		},
+		function (data, status){
+			$("#LoginStatus").html("<h2>" + data + "</h2>");
+		});
+	});
+});
+</script>
+<div id="LoginStatus" class="text-center"><h2>Login</h2>
+<input id="Username" type="text" name="User_name" placeholder="User name">
+<input id="Password" type="text" name="pass" placeholder="Password">
+<button>Login</button>
+</div>

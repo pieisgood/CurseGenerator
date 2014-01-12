@@ -26,6 +26,5 @@ module.exports.combineText = function(textList){
 	for(var i = 0; i < textList.length; i++){
 		outText = outText + textList[i] + " ";
 	}
-
 	return outText;
 };

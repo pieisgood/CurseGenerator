@@ -7,7 +7,8 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
 	host	: 'localhost',
 	user	: 'root',
-	password: 'gokulee'
+	password: 'gokulee',
+	database: 'cursegenerator'
 });
 
 connection.connect();
@@ -37,8 +38,21 @@ app.get('/login', function (request, response){
 		response.render('adminInterface', {title: "Welcome Admin"});
 	}
 	else{
-		response.render('wrong', {title: "Sorry try again"});
+		response.send("FAILURE");
 	}
+});
+
+app.post('/dbEntry', function (request, response){
+	console.log(request.body);
+	var wordData = request.body;
+	words.insertWord(connection, wordData, function (err){
+		if(err){
+			response.send("Failed to insert into " + wordData.entryType + " database");
+		}
+		else{
+			response.send("Insert Successful");
+		}
+	});
 });
 
 app.post('/generate', function (request, response){
@@ -51,5 +65,12 @@ app.post('/generate', function (request, response){
 		response.send(parser.combineText(newList));
 	});
 });
+
+function checkLogin(usr, pswd){
+	if(usr === "pieisgood" && pswd === "password"){
+		return true;
+	}
+	return false;
+};
 
 app.listen(3000);

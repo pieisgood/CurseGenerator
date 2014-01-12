@@ -1,0 +1,28 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.post("/dbEntry", {
+			dbEntry: $("#entry").val(),
+			entryType: $("#EntryType").val()
+		},
+		function (data, status){
+			$("#EntryStatus").html("<h2>" + data + "</h2>");
+		});
+	});
+});
+</script>
+<div id="EntryStatus"></div>
+<select id="EntryType">
+  <option value="noun">noun</option>
+  <option value="verb">verb</option>
+  <option value="adverb">adverb</option>
+  <option value="adjective">adjective</option>
+  <option value="interjection">interjection</option>
+  <option value="pronoun">pronoun</option>
+  <option value="conjunction">conjunction</option>
+  <option value="preposition">preposition</option>
+</select>
+<input id="entry" type="text" name="dbEntry" placeholder="Enter word here">
+<button>Enter Word</button>

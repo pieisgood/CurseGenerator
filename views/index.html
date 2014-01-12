@@ -7,12 +7,54 @@ $(document).ready(function(){
 			text: $("#curseInput").val()
 		},
 		function (data, status){
-			$("#outCurse").html(data);
+			$("#outCurse").html( data );
 		});
 	});
 });
 </script>
-<h1> Curse Generator </h1>
-<div id="outCurse"><h2>This is where our new curse will be</h2></div>
-<button>Generate Curse</button><input id="curseInput" type="text" name="generator_input" value="{{{curse}}}">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+      <div class="text-center">
+        <h1>Curse Generator</h1>
+        <p id="outCurse">Your curse will be displayed here</p>
+        <p><input id="curseInput" type="text" class="form-control" placeholder="{{{curse}}}"></p>
+        <p><button id="genButton" data-loading-text="Loading..." class="btn btn-primary btn-lg" role="button">Generate Curse</button></p>
+        </div>
+      </div>
+    </div>
 
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>How to use</h2>
+          <p>The Curse Generator takes in a certain syntax, so in order to get a proper set of words out,
+          please follow this syntax. Each type of word you want generated must be surrounded by "[" and "]".
+          Also to have more than one word you must add an "+" symbol between word types. All words that don't 
+          follow this format will be spit back out by the generator. <br>
+          Example: [verb] + the + [adjective] + [noun] <br>
+          This could generate: fuck the fucking fuckers</p>
+        </div>
+        <div class="col-md-4">
+          <h2 class="text-center">Types of words</h2>
+          <p class="text-center">[noun]<br>[verb]<br>[adjective]<br>[pronoun]<br>[adverb]<br>[interjection]<br>[preposition]<br>[conjunction] </p>
+       </div>
+        <div class="col-md-4">
+          <h2>Contact us</h2>
+          <p>Send us an email at: cursegen@gmail.com</p>
+        </div>
+      </div>
+
+      <hr>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  
+
+      
